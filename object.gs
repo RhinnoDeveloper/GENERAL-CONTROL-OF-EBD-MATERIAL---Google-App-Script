@@ -16,7 +16,8 @@ var spreadsheet = SpreadsheetApp;
 */
 
 // CRIAÇÃO DE MÉTODO CONSTRUTOR - 19.10.2023
-class dataBase{
+//classe Pastas
+class folders{
   constructor(){
     this.nameSheet = "database"
     this.spreadsheet = spreadsheet.getActiveSpreadsheet().getId();//armazenamento da ID
@@ -31,15 +32,29 @@ class dataBase{
     this.descriptionFolderGeneralControl = this.sheet.getRange('D43').getValue();//descrição da pasta controle geral
     this.folderYear = this.sheet.getRange('D44').getValue()//nome da pasta ano em exercicio
     this.descriptionFolderYear = this.sheet.getRange('D45').getValue()//descrição da pasta ano em exercicio
+    this.quarterFolderName = this.sheet.getRange('D46').getValue()//nome da pasta do trimestre em exercicio    
+  }
+}
+//classe Formulário
+class forms extends folders{
+  constructor(){
+    super()
+    this.formFileTitle = this.sheet.getRange('D28').getValue()//titulo do arquivo formulario
+    this.descriptionFormFileTitle = this.sheet.getRange('E28').getValue()//descrição do arquivo formulario
+    this.formTitle = this.sheet.getRange('D30').getValue()//titulo interno do formulario
+    this.descriptionForm = this.sheet.getRange('D32').getValue()//descrição interno do formulário
+    this.confirmationMessage = this.sheet.getRange('E30').getValue()//confirmação de mensagem após o envio das respostas do formulario
+    this.congregationCounter = this.sheet.getRange('H1').getValue()//numero de comgregações
+    this.pageBreakCounter = this.sheet.getRange('H2').getValue()//numero de quebra de paginas (seções)
 
-    
   }
 }
 
+
 function test(){
-  var b = new dataBase()
+  var b = new forms()
   
-  console.log(b.descriptionFolderMan)
+  console.log(b.descriptionFormFileTitle)
 
 }
   
