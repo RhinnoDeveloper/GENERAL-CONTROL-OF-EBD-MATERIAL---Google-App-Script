@@ -1,10 +1,6 @@
-var form = FormApp;
-var drive = DriveApp;
-var gemail = GmailApp;
-var calendario = CalendarApp;
-var spreadsheet = SpreadsheetApp;
-
-/* **************************************** 
+/* ************************************************
+  DATA: 19.10.2023 - CRIADOR: RAFAEL DA SILVA MOURA
+  *************************************************
   CRIAÇÃO DO MENU,
   CRIAÇÃO DE PASTAS,
   CRIAÇÃO DE FORMULÁRIO,
@@ -14,9 +10,20 @@ var spreadsheet = SpreadsheetApp;
   CRIAÇÃO DE MÉTODO CONSTRUTOR
   *****************************************
 */
+var form = FormApp;
+var drive = DriveApp;
+var gemail = GmailApp;
+var calendario = CalendarApp;
+var spreadsheet = SpreadsheetApp;
+var ui = spreadsheet.getUi()
 
-// CRIAÇÃO DE MÉTODO CONSTRUTOR - 19.10.2023
-//classe Pastas
+
+
+/* ****************************************
+  CRIAÇÃO DE MÉTODO CONSTRUTOR - 19.10.2023
+
+classe Pastas
+*/
 class folders{
   constructor(){
     this.nameSheet = "database"
@@ -44,17 +51,48 @@ class forms extends folders{
     this.formTitle = this.sheet.getRange('D30').getValue()//titulo interno do formulario
     this.descriptionForm = this.sheet.getRange('D32').getValue()//descrição interno do formulário
     this.confirmationMessage = this.sheet.getRange('E30').getValue()//confirmação de mensagem após o envio das respostas do formulario
-    this.congregationCounter = this.sheet.getRange('H1').getValue()//numero de comgregações
+    this.congregationCounter = this.sheet.getRange('H1').getValue()//numero de congregações
     this.pageBreakCounter = this.sheet.getRange('H2').getValue()//numero de quebra de paginas (seções)
-
+    this.magazineAdultoCounter = this.sheet.getRange('H3').getValue()//numero de revistas adulto
+    this.magazineJovensCounter = this.sheet.getRange('H4').getValue()//numero de revistas jovens
+    this.magazineAdolescentesCounter = this.sheet.getRange('H5').getValue()//numero de revistas adolescetes (todas as faixas)
+    this.magazineInfantilCounter = this.sheet.getRange('H6').getValue()//numero de revistas infantis
+    this.magazineVisualCounter = this.sheet.getRange('H7').getValue()//numero de visuais
+    this.magazineNovosConvertidosCounter = this.sheet.getRange('H8').getValue()//numero de revistas novos convertidos
+    this.magazineSecretariaCounter = this.sheet.getRange('H9').getValue()//numero de revistas diversos (secretaria)
   }
 }
+
+/* **********************
+  CRIAÇÃO DE FUNÇÕES
+
+  Criação das pastas
+  ***********************
+  */
+  function newFolders(){
+    var root = new folders()
+    var folderx = {
+      mann: drive.getFoldersByName(root.nameFolderMan).hasNext(),
+      formm: drive.getFoldersByName(root.nameFolderform).hasNext(),
+      reportss: drive.getFoldersByName(root.nameFolderReports).hasNext()
+    }
+    var creation = drive.createFolder;
+    //var idMan = "";
+    
+      folderx.mann==false ? idMan = creation(root.nameFolderMan).setDescription(root.descriptionFolderMan).getId() : idMan = drive.getFoldersByName(root.nameFolderMan).next().getId()
+      
+      
+      
+      
+
+    //console.log(folderx.mann==true ? "Existe!" : "Precisa criar")
+  }
 
 
 function test(){
   var b = new forms()
   
-  console.log(b.descriptionFormFileTitle)
+  console.log(b.magazineNovosConvertidosCounter)
 
 }
   
