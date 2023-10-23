@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* ************************************************
   DATA: 19.10.2023 - CRIADOR: RAFAEL DA SILVA MOURA
   *************************************************
@@ -15,7 +16,7 @@ var drive = DriveApp;
 var gemail = GmailApp;
 var calendario = CalendarApp;
 var spreadsheet = SpreadsheetApp;
-var ui = spreadsheet.getUi()
+var ui = spreadsheet.getUi;
 
 
 
@@ -72,14 +73,22 @@ class forms extends folders{
   function newFolders(){
     var root = new folders()
     var folderx = {
-      mann: drive.getFoldersByName(root.nameFolderMan).hasNext(),
-      formm: drive.getFoldersByName(root.nameFolderform).hasNext(),
-      reportss: drive.getFoldersByName(root.nameFolderReports).hasNext()
+      mann: drive.getFoldersByName(root.nameFolderMan),
+      formm: drive.getFoldersByName(root.nameFolderform),
+      reportss: drive.getFoldersByName(root.nameFolderReports)
     }
     var creation = drive.createFolder;
-    //var idMan = "";
+    var idMan = "";
     
-      folderx.mann==false ? idMan = creation(root.nameFolderMan).setDescription(root.descriptionFolderMan).getId() : idMan = drive.getFoldersByName(root.nameFolderMan).next().getId()
+      folderx.mann.hasNext()==false ? idMan = creation(root.nameFolderMan).setDescription(root.descriptionFolderMan).getId() : idMan = drive.getFoldersByName(root.nameFolderMan).next().getId();
+
+      folderx.mann.next().getFolders().hasNext()==false ? drive.getFolderById(idMan).createFolder(root.nameFolderGeneralControl).setDescription(root.descriptionFolderGeneralControl)&
+      drive.getFolderById(idMan).createFolder(root.nameFolderReports).setDescription(root.descriptionFolderReports)&
+      drive.getFolderById(idMan).createFolder(root.nameFolderform).setDescription(root.descriptionFolderform) : idMan = drive.getFoldersByName(root.nameFolderMan).next().getId();
+      
+      var b = drive.getFolderById(idMan).getFolders().hasNext()
+
+           
       
       
       
@@ -87,6 +96,7 @@ class forms extends folders{
 
     //console.log(folderx.mann==true ? "Existe!" : "Precisa criar")
   }
+  
 
 
 function test(){
