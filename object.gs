@@ -81,14 +81,55 @@ class forms extends folders{
     var idMan = "";
     
       folderx.mann.hasNext()==false ? idMan = creation(root.nameFolderMan).setDescription(root.descriptionFolderMan).getId() : idMan = drive.getFoldersByName(root.nameFolderMan).next().getId();
+           
+      let nameFolderMan = drive.getFolderById(idMan).getName();
 
-      folderx.mann.next().getFolders().hasNext()==false ? drive.getFolderById(idMan).createFolder(root.nameFolderGeneralControl).setDescription(root.descriptionFolderGeneralControl)&
+      drive.getFoldersByName(nameFolderMan).next().getFolders().hasNext()==false ? drive.getFolderById(idMan).createFolder(root.nameFolderGeneralControl).setDescription(root.descriptionFolderGeneralControl)&
+      drive.getFolderById(idMan).createFolder(root.nameFolderReports).setDescription(root.descriptionFolderReports)&
+      drive.getFolderById(idMan).createFolder(root.nameFolderform).setDescription(root.descriptionFolderform) : false
+
+      let h = drive.getFoldersByName(nameFolderMan).next();
+      let hh = h.getFolders()
+      
+      while(hh.hasNext()){
+        
+        let nome = hh.next().getName() 
+        let nomess = root.nameFolderReports
+        console.log(nome)
+        nome == nomess ? h.getFoldersByName(nomess).next().createFolder(root.folderYear).setDescription(root.descriptionFolderYear).createFolder(root.quarterFolderName) : console.log("errou")
+
+
+        //h.next().getName() == root.nameFolderReports ? console.log("esse "+h.next().getName()) : console.log("errou")
+
+      }
+      
+     
+      
+      
+      //console.log(hh)
+      //hh.hasNext()==false ?  
+      
+      
+        
+
+        
+
+      
+      /*folderx.mann.next().getFolders().hasNext()==false ? drive.getFolderById(idMan).createFolder(root.nameFolderGeneralControl).setDescription(root.descriptionFolderGeneralControl)&
       drive.getFolderById(idMan).createFolder(root.nameFolderReports).setDescription(root.descriptionFolderReports)&
       drive.getFolderById(idMan).createFolder(root.nameFolderform).setDescription(root.descriptionFolderform) : idMan = drive.getFoldersByName(root.nameFolderMan).next().getId();
       
-      var b = drive.getFolderById(idMan).getFolders().hasNext()
+      
+      var b = drive.getFolderById(idMan).getFolders()
+      console.log(b.hasNext())
+      //console.log(b.next().getFolderById(root.nameFolderReports))
 
-           
+      while(b.hasNext()){
+        var c = b.next()
+        console.log(c.getName())
+        console.log(c.getId())
+      }
+        */   
       
       
       
