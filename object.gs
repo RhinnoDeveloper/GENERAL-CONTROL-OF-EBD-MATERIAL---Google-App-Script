@@ -40,7 +40,9 @@ class folders{
     this.descriptionFolderGeneralControl = this.sheet.getRange('D43').getValue();//descrição da pasta controle geral
     this.folderYear = this.sheet.getRange('D44').getValue()//nome da pasta ano em exercicio
     this.descriptionFolderYear = this.sheet.getRange('D45').getValue()//descrição da pasta ano em exercicio
-    this.quarterFolderName = this.sheet.getRange('D46').getValue()//nome da pasta do trimestre em exercicio    
+    this.quarterFolderName = this.sheet.getRange('D46').getValue()//nome da pasta do trimestre em exercicio
+    this.nameRequestFromCongregations = this.sheet.getRange('D34').getValue()//nome da planilha que recebera as respostas das congregações
+    this.descriptionNameRequestFromCongregations = this.sheet.getRange('D48').getValue()//descrição da planilha
   }
 }
 //classe Formulário
@@ -61,13 +63,14 @@ class forms extends folders{
     this.magazineVisualCounter = this.sheet.getRange('H7').getValue()//numero de visuais
     this.magazineNovosConvertidosCounter = this.sheet.getRange('H8').getValue()//numero de revistas novos convertidos
     this.magazineSecretariaCounter = this.sheet.getRange('H9').getValue()//numero de revistas diversos (secretaria)
+
   }
 }
 
 /* **********************
-  CRIAÇÃO DE FUNÇÕES
+  CRIAÇÃO DE FUNÇÕES 
 
-  Criação das pastas
+  Criação das pastas - 25.10.2023
   ***********************
   */
   function newFolders(){
@@ -96,54 +99,39 @@ class forms extends folders{
         let nome = hh.next().getName() 
         let nomess = root.nameFolderReports
         console.log(nome)
-        nome == nomess ? h.getFoldersByName(nomess).next().createFolder(root.folderYear).setDescription(root.descriptionFolderYear).createFolder(root.quarterFolderName) : console.log("errou")
+        nome == nomess ? h.getFoldersByName(nomess).next().createFolder(root.folderYear).setDescription(root.descriptionFolderYear).createFolder(root.quarterFolderName) : console.log("errou")      
 
-
-        //h.next().getName() == root.nameFolderReports ? console.log("esse "+h.next().getName()) : console.log("errou")
-
-      }
-      
-     
-      
-      
-      //console.log(hh)
-      //hh.hasNext()==false ?  
-      
-      
-        
-
-        
-
-      
-      /*folderx.mann.next().getFolders().hasNext()==false ? drive.getFolderById(idMan).createFolder(root.nameFolderGeneralControl).setDescription(root.descriptionFolderGeneralControl)&
-      drive.getFolderById(idMan).createFolder(root.nameFolderReports).setDescription(root.descriptionFolderReports)&
-      drive.getFolderById(idMan).createFolder(root.nameFolderform).setDescription(root.descriptionFolderform) : idMan = drive.getFoldersByName(root.nameFolderMan).next().getId();
-      
-      
-      var b = drive.getFolderById(idMan).getFolders()
-      console.log(b.hasNext())
-      //console.log(b.next().getFolderById(root.nameFolderReports))
-
-      while(b.hasNext()){
-        var c = b.next()
-        console.log(c.getName())
-        console.log(c.getId())
-      }
-        */   
-      
-      
-      
-      
-
-    //console.log(folderx.mann==true ? "Existe!" : "Precisa criar")
+      }  
+      //Em alguns pontos desta função, inserir alguns alerts.     
   }
-  
+
+  /* *************
+    Criação do Formulário e planilha de resposta.
+    **************
+  */
+  function newForms(){
+    let root = new folders()
+    let rootForms = new forms()
+
+    let newForm = form.create(rootForms.formFileTitle).setTitle(rootForms.formTitle).setDescription(rootForms.descriptionForm)
+    drive.getFilesByName(rootForms.formFileTitle).next().setDescription(rootForms.descriptionFormFileTitle)
+    let newSheets = spreadsheet.create(root.nameRequestFromCongregations).getId()
+
+    drive.getFileById(newSheets).setDescription(root.descriptionNameRequestFromCongregations)   
+    //drive.getFilesByName(root.nameRequestFromCongregations).next().setDescription(root.descriptionNameRequestFromCongregations)
+    //let contSection = 0
+
+    //while(contSection<=rootForms.pageBreakCounter){
+      
+    //}
+
+  }
 
 
 function test(){
-  var b = new forms()
+  var b = new folders()
   
-  console.log(b.magazineNovosConvertidosCounter)
+  drive.getFilesByName(b.nameRequestFromCongregations).next().setDescription(b.descriptionNameRequestFromCongregations)
 
 }
   
